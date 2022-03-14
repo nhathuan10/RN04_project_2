@@ -1,17 +1,18 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { Provider } from 'react-redux'
+import store from './src/redux/rootStore'
+import { NavigationContainer } from '@react-navigation/native'
+import RootNavigation from './src/navigation/rootNavigation'
 
-import { Text, StyleSheet, View } from 'react-native';
-import React, { Component } from 'react';
-import  FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
-
-export default class App extends Component {
-  render() {
-    return (
-      <View>
-        <Text>asdasdsaasdasd</Text>
-        
-      </View>
-    );
-  }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <RootNavigation />
+      </NavigationContainer>
+    </Provider>
+  )
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({})
