@@ -1,17 +1,36 @@
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Screen from '../../screens';
 import { tabName } from '../../configs/navigationConstants';
-import  {COLORS}  from '../../themes';
+import { COLORS } from '../../themes';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 
 const BottomTab = createBottomTabNavigator();
 
-const screenOptions = { 
-    headerShown: false, 
-    tabBarShowLabel: false, 
-    tabBarStyle: {backgroundColor: COLORS.lightBack, borderTopColor: COLORS.lightBack}
-}
+const tabBarIcon = ({ route: { name }, size, focused }) => {
+    const icons = {
+        HomeTab: 'home',
+        StreamTab: 'game-controller',
+        ProfileTab: 'user',
+    };
+    const backgroundColor = focused ? COLORS.lightPurple : 'transparent';
+    return (
+        <View style={{...styles.tabBarIcon, backgroundColor}}>
+            <EntypoIcon name={icons[name]} size={size} color={COLORS.white} />
+        </View>
+    )
+};
+
+const screenOptions = ({ route }) => ({
+    headerShown: false,
+    tabBarShowLabel: false,
+    tabBarStyle: {
+        backgroundColor: COLORS.lightBack,
+        borderTopColor: COLORS.lightBack
+    },
+    tabBarIcon: (params) => tabBarIcon({ ...params, route }),
+});
 
 export default class HomeTab extends Component {
     render() {
@@ -33,3 +52,13 @@ export default class HomeTab extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    tabBarIcon: {
+        width: 60,
+        height: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20
+    }
+})
