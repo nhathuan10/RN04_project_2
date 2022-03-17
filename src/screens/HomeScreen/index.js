@@ -1,8 +1,16 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image, Dimensions } from 'react-native'
 import React, { Component } from 'react'
 import { BackgroundView, Text, Header } from '../../components'
+import axios from 'axios'
+
+const { height: sHeight, width: sWidth } = Dimensions.get('window')
 
 export default class HomeScreen extends Component {
+    state = {
+        loading: true,
+        game: {},
+    }
+
     LeftComponent = (
         <View>
             <Text header>
@@ -11,13 +19,33 @@ export default class HomeScreen extends Component {
             <Text>Best games for today</Text>
         </View>
     )
+
+    componentDidMount() {
+        axios({ url: 'http://localhost:3000/games', method: 'GET' })
+            //.then(res => this.setState({ game: res.data[0], loading: false }))
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
+    }
+
     render() {
+        const {
+            game: { title, subTitle, icon, preview, backgroundColor },
+            loading,
+        } = this.state;
         return (
             <BackgroundView>
                 <Header
                     LeftComponent={this.LeftComponent}
                     RightComponent={<View style={styles.avatar} />}
                 />
+                <View>
+                    {!loading && (
+                        <Image
+                            source={{ uri: preview[0] }}
+                            style={{ width: sWidth, height: 200 }}
+                        />
+                    )}
+                </View>
             </BackgroundView>
         )
     }
