@@ -22,7 +22,7 @@ export default class HomeScreen extends Component {
 
     componentDidMount() {
         axios({ url: 'http://localhost:3000/games', method: 'GET' })
-            //.then(res => this.setState({ game: res.data[0], loading: false }))
+            // .then(res => this.setState({ game: res.data[0], loading: false }))
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     }
@@ -38,14 +38,14 @@ export default class HomeScreen extends Component {
                     LeftComponent={this.LeftComponent}
                     RightComponent={<View style={styles.avatar} />}
                 />
-                <View>
-                    {!loading && (
+                {!loading && (
+                    <View>
                         <Image
                             source={{ uri: preview[0] }}
                             style={{ width: sWidth, height: 200 }}
                         />
-                    )}
-                </View>
+                    </View>
+                )}
             </BackgroundView>
         )
     }
