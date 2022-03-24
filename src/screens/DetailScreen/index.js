@@ -4,7 +4,7 @@ import { BackgroundView, Header, Text } from '../../components'
 import { COLORS } from '../../themes'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import axios from 'axios'
-import { sWidth } from '../../utils'
+import { mapLocalHostToIP, sWidth } from '../../utils'
 import IconButton from 'react-native-vector-icons/Ionicons'
 
 export default class DetailScreen extends Component {
@@ -12,8 +12,11 @@ export default class DetailScreen extends Component {
         game: {}
     }
     componentDidMount() {
-        axios({ method: 'GET', url: `http://192.168.1.106:3000/games/${this.props.route.params.id}` })
-            .then(res => this.setState({ game: res.data }))
+        axios({ method: 'GET', url: `http://10.0.2.2:3000/games/${this.props.route.params.id}` })
+            .then(res => {
+                const game = mapLocalHostToIP(res.data);
+                this.setState({game: game});
+            })
             .catch(err => console.log(err))
     }
 

@@ -4,6 +4,7 @@ import { BackgroundView, Text, Header } from '../../components'
 import axios from 'axios'
 import GameItem from './components/GameItem'
 import { stackName } from '../../configs/navigationConstants'
+import { mapLocalHostToIP } from '../../utils'
 
 const { height: sHeight, width: sWidth } = Dimensions.get('window')
 
@@ -23,12 +24,15 @@ export default class HomeScreen extends Component {
     )
 
     onPressGameItem = (id) => {
-        this.props.navigation.navigate(stackName.detailStack, {id});
+        this.props.navigation.navigate(stackName.detailStack, { id });
     }
 
     componentDidMount() {
-        axios({ url: 'http://192.168.1.106:3000/games', method: 'GET' })
-            .then(res => this.setState({ listGame: res.data, loading: false }))
+        axios({ url: 'http://10.0.2.2:3000/games', method: 'GET' })
+            .then(res => {
+                const games = mapLocalHostToIP(res.data);
+                this.setState({ listGame: games, loading: false })
+            })
             .catch(err => console.log(err));
     }
 
@@ -40,13 +44,13 @@ export default class HomeScreen extends Component {
                     LeftComponent={this.LeftComponent}
                     RightComponent={<View style={styles.avatar} />}
                 />
-                <FlatList 
+                <FlatList
                     data={listGame}
-                    renderItem={({item}) => (
-                        <GameItem game={item} onPress={() => this.onPressGameItem(item.id)}/>
+                    renderItem={({ item }) => (
+                        <GameItem game={item} onPress={() => this.onPressGameItem(item.id)} />
                     )}
-                    ItemSeparatorComponent={() => <View style={{height: 60}}></View>}
-                    contentContainerStyle={{paddingBottom: 60}}
+                    ItemSeparatorComponent={() => <View style={{ height: 60 }}></View>}
+                    contentContainerStyle={{ paddingBottom: 60 }}
                     showsVerticalScrollIndicator={false}
                 />
             </BackgroundView>
