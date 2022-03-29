@@ -5,14 +5,13 @@ import axios from 'axios'
 import GameItem from './components/GameItem'
 import { stackName } from '../../configs/navigationConstants'
 import { mapLocalHostToIP } from '../../utils'
+import { connect } from 'react-redux'
+import { getListGame, requestListGameSuccess, setListGame } from '../../redux/actions/gameAction'
+import { requestListGame } from '../../redux/thunk/gameActionThunk'
 
 const { height: sHeight, width: sWidth } = Dimensions.get('window')
 
-export default class HomeScreen extends Component {
-    state = {
-        loading: true,
-        listGame: [],
-    }
+class HomeScreen extends Component {
 
     LeftComponent = (
         <View>
@@ -28,16 +27,17 @@ export default class HomeScreen extends Component {
     }
 
     componentDidMount() {
-        axios({ url: 'http://10.0.2.2:3000/games', method: 'GET' })
-            .then(res => {
-                const games = mapLocalHostToIP(res.data);
-                this.setState({ listGame: games, loading: false })
-            })
-            .catch(err => console.log(err));
+        this.props.dispatch(requestListGame());
+        // axios({ method: 'GET', url: 'http://10.0.2.2:3000/games' })
+        //     .then(res => {
+        //         const listGame = mapLocalHostToIP(res.data);
+        //         this.props.setListGame(listGame);
+        //     })
+        //     .catch(err => console.log(err))
     }
 
     render() {
-        const { listGame, loading } = this.state;
+        const { listGame } = this.props;
         return (
             <BackgroundView>
                 <Header
@@ -45,6 +45,7 @@ export default class HomeScreen extends Component {
                     RightComponent={<View style={styles.avatar} />}
                 />
                 <FlatList
+                    //keyExtractor={item => item.id}
                     data={listGame}
                     renderItem={({ item }) => (
                         <GameItem game={item} onPress={() => this.onPressGameItem(item.id)} />
@@ -57,6 +58,16 @@ export default class HomeScreen extends Component {
         )
     }
 }
+
+// const mapDispatchToProps = (dispatch) => ({
+//     setListGame: (listGame) => dispatch(setListGame(listGame))
+// })
+
+const mapStateToProps = (state) => ({
+    listGame: state.gameReducer.listGame,
+})
+
+export default connect(mapStateToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
     headerContainer: {
