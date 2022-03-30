@@ -5,7 +5,7 @@ import Text from '../../../components/Text'
 export default function InfoSubContainer() {
     return (
         <View style={styles.infoContainer} >
-            <View style={[styles.infoSubContainer, { marginRight: 8 }]} >
+            <View style={[styles.infoSubContainer, { marginRight: 15 }]} >
                 <Text header bold style={{marginRight: 3}}>250</Text>
                 <Text subText bold style={{ marginBottom: 3 }}>Games</Text>
             </View>

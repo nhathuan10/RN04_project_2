@@ -8,9 +8,9 @@ export default function GameProfileItem({ item, price, sales }) {
         <TouchableOpacity style={styles.container}>
             <Image source={{ uri: item.icon }} style={styles.gameIcon} />
             <View style={styles.gameItemContainer}>
-                <View style={{ marginHorizontal: 7 }}>
+                <View style={{ marginHorizontal: 10 }}>
                     <Text bold>{item.title}</Text>
-                    <Text>{sales} Sales</Text>
+                    <Text subText>{sales} Sales</Text>
                 </View>
                 <View>
                     <Text bold style={{ color: COLORS.lightPurple }}>$ {price}</Text>
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     gameIcon: {
         height: 90,
         width: 90,
+        borderRadius: 10,
     },
     gameItemContainer: {
         flexDirection: 'row', 
