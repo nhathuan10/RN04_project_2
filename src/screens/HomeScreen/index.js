@@ -1,12 +1,9 @@
 import { View, StyleSheet, Image, Dimensions, FlatList } from 'react-native'
 import React, { Component } from 'react'
 import { BackgroundView, Text, Header } from '../../components'
-import axios from 'axios'
 import GameItem from './components/GameItem'
 import { stackName } from '../../configs/navigationConstants'
-import { mapLocalHostToIP } from '../../utils'
 import { connect } from 'react-redux'
-import { getListGame, requestListGameSuccess, setListGame } from '../../redux/actions/gameAction'
 import { requestListGame } from '../../redux/thunk/gameActionThunk'
 
 const { height: sHeight, width: sWidth } = Dimensions.get('window')
@@ -42,7 +39,7 @@ class HomeScreen extends Component {
             <BackgroundView>
                 <Header
                     LeftComponent={this.LeftComponent}
-                    RightComponent={<View style={styles.avatar} />}
+                    RightComponent={<Image source={require('../../assets/avatar.jpg')} style={styles.avatar} />}
                 />
                 <FlatList
                     //keyExtractor={item => item.id}

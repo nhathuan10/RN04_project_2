@@ -5,10 +5,8 @@ import TextTitle from '../../../components/TextTitle'
 
 export default function LiveGameTitle({ title }) {
     return (
-        <View style={styles.container}>
-            {/* <Text title bold style={styles.title}>{title}</Text>
-            <Text title bold style={styles.status}>Live</Text> */}
-            <TextTitle title={title} style={{marginRight: 7}} color={COLORS.lightPurple}/>
+        <View style={styles.container} >
+            <TextTitle title={title} color={COLORS.lightPurple} margin={{marginRight: 7}}/>
             <TextTitle title='Live' color={COLORS.lightRed}/>
         </View >
     )

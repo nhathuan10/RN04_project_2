@@ -1,9 +1,13 @@
 import { REQUEST_DETAIL_GAME_SUCCESS, REQUEST_LIST_GAME_SUCCESS} from '../actions/gameAction'
 
+
 const initialState = {
     listGame: [],
     game:{},
 }
+
+
+
 
 export default (state = initialState, action ) => {
     switch (action.type) {

@@ -1,7 +1,7 @@
 import { StyleSheet, View, TextInput as RNTextInput } from 'react-native'
 import React from 'react'
-import { COLORS } from '../../themes'
 import SearchIcon from 'react-native-vector-icons/FontAwesome5'
+import { COLORS } from '../../../themes'
 
 export default function TextInput() {
     return (
