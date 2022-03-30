@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 20,
         marginBottom: 50,
+        marginTop: 20,
     },
     avatar: {
         width: 50,

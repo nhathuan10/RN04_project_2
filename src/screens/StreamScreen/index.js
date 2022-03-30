@@ -1,11 +1,13 @@
-import { FlatList, Image, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { FlatList,  StyleSheet, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { COLORS } from '../../themes'
 import Text from '../../components/Text'
-import TextInput from '../../components/TextInput'
 import { requestListGame } from '../../redux/thunk/gameActionThunk'
 import { useDispatch, useSelector } from 'react-redux'
-import LiveGameTitle from './LiveGameTitle'
+import GameItemStream from './components/GameItemStream'
+import GameIcon from './components/GameIcon'
+import LiveGameContainer from './components/LiveGameContainer'
+import TextInput from './components/TextInput'
 
 export default function StreamScreen() {
     const listGame = useSelector(state => state.gameReducer.listGame);
@@ -17,18 +19,13 @@ export default function StreamScreen() {
 
     const renderGameIcon = ({ item }) => {
         return (
-            <TouchableOpacity>
-                <Image source={{ uri: item.icon }} style={styles.gameIcon} />
-            </TouchableOpacity>
+            <GameIcon item={item}/>
         )
     }
 
     const renderLiveGame = ({ item }) => {
         return (
-            <TouchableOpacity>
-                <Image source={{ uri: item.preview[0] }} style={styles.liveGame} />
-                <LiveGameTitle title={item.title} />
-            </TouchableOpacity>
+            <GameItemStream item={item}/>
         )
     }
 
@@ -46,10 +43,7 @@ export default function StreamScreen() {
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{ paddingVertical: 15 }}
             />
-            <View style={styles.liveGameContainer}>
-                <Text title bold>Live Games</Text>
-                <Text style={{ color: COLORS.lightPurple }}>View All</Text>
-            </View>
+            <LiveGameContainer />
             <FlatList
                 data={listGame}
                 renderItem={renderLiveGame}
@@ -71,20 +65,5 @@ const styles = StyleSheet.create({
     },
     subHeader: {
         marginTop: 25,
-    },
-    gameIcon: {
-        height: 90,
-        width: 90,
-        borderRadius: 10,
-    },
-    liveGameContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    liveGame: {
-        height: 220,
-        width: '100%',
-        borderRadius: 10,
     },
 })
