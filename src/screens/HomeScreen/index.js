@@ -16,7 +16,7 @@ class HomeScreen extends Component {
     LeftComponent = (
         <View>
             <Text header>
-                Hello <Text bold>Huan Thep</Text>
+                Hello <Text bold>Nhat Huan</Text>
             </Text>
             <Text>Best games for today</Text>
         </View>
