@@ -42,7 +42,7 @@ class HomeScreen extends Component {
                     RightComponent={<Image source={require('../../assets/avatar.jpg')} style={styles.avatar} />}
                 />
                 <FlatList
-                    //keyExtractor={item => item.id}
+                    keyExtractor={(item) => item.id.toString()}
                     data={listGame}
                     renderItem={({ item }) => (
                         <GameItem game={item} onPress={() => this.onPressGameItem(item.id)} />

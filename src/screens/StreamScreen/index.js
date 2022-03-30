@@ -35,6 +35,7 @@ export default function StreamScreen() {
             <TextInput />
             <Text subText bold style={styles.subHeader}>Popular Game</Text>
             <FlatList
+                keyExtractor={(item) => item.id.toString()}
                 horizontal
                 ItemSeparatorComponent={() => <View style={{ width: 45 }} />}
                 data={listGame}
@@ -45,6 +46,7 @@ export default function StreamScreen() {
             />
             <LiveGameContainer />
             <FlatList
+                keyExtractor={(item) => item.id.toString()}
                 data={listGame}
                 renderItem={renderLiveGame}
                 ItemSeparatorComponent={() => <View style={{ height: 15 }} />}

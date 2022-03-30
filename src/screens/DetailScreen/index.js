@@ -90,7 +90,7 @@ class DetailScreen extends Component {
                     </View>
                 </View>
                 <FlatList
-                    keyExtractor={item => item.id}
+                    //keyExtractor={(item) => item.key.toString()}
                     style={{ flexGrow: 0, marginTop: 10 }}
                     horizontal
                     showsHorizontalScrollIndicator={false}

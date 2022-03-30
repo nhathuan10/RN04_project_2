@@ -45,6 +45,7 @@ export default function ProfileScreen() {
             <InfoSubContainer />
             <Text title subText bold style={{ marginVertical: 10 }}>Purchased Games</Text>
             <FlatList 
+                keyExtractor={(item) => item.id.toString()}
                 data={listGame}
                 renderItem={renderGame}
                 ItemSeparatorComponent={() => <View style={{height: 15}}/>}
